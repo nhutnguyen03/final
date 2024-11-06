@@ -1,5 +1,6 @@
 import numpy as np
 
+#Hàm này tính góc giữa ba điểm a, b, và c trong không gian 2D. Các điểm a, b, c đại diện cho các tọa độ (x, y) trên mặt phẳng.
 def get_angle(a, b, c):
     radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
     angle = np.abs(np.degrees(radians))
