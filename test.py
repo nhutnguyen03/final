@@ -118,6 +118,9 @@ def main():
     draw = mp.solutions.drawing_utils
     cap = cv2.VideoCapture(0)
 
+    # Biến tính FPS
+    prev_time = time.time()
+
     try:
         start_time = time.time()
         while cap.isOpened():
@@ -136,8 +139,17 @@ def main():
                     landmark_list.append((lm.x, lm.y))
 
             detect_gesture(frame, landmark_list, processed)
+
+            # Tính toán FPS
+            curr_time = time.time()
+            fps = 1 / (curr_time - prev_time)
+            prev_time = curr_time
+
+            # Hiển thị FPS trên khung hình
+            cv2.putText(frame, f"FPS: {int(fps)}", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+
             cv2.imshow('Tay thay chuot', frame)
-            
+
             # Log accuracy results every 10 seconds
             if time.time() - start_time > 10:
                 calculate_accuracy()
@@ -152,3 +164,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
