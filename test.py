@@ -86,13 +86,13 @@ def detect_gesture(frame, landmark_list, processed):
 
         if util.get_distance([landmark_list[4], landmark_list[5]]) < 50 and util.get_angle(landmark_list[5], landmark_list[6], landmark_list[8]) > 90:
             move_mouse(index_finger_tip)
-        elif is_right_click(landmark_list, thumb_index_dist):
+        elif is_left_click(landmark_list, thumb_index_dist):
             mouse.press(Button.left)
             mouse.release(Button.left)
             cv2.putText(frame, "Left Click", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             click_attempts += 1
             click_accuracy_count += 1  # Assuming each detected click is a correct click
-        elif is_left_click(landmark_list, thumb_index_dist):
+        elif is_right_click(landmark_list, thumb_index_dist):
             mouse.press(Button.right)
             mouse.release(Button.right)
             cv2.putText(frame, "Right Click", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
